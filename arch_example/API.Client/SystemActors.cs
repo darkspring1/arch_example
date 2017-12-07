@@ -1,10 +1,12 @@
 ﻿using Akka.Actor;
 using Akka.Routing;
+using API.ActorModel.Commands;
 using API.ActorModel.SM.TaskEngine.Api.ActorModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace API.Client
 {
@@ -12,32 +14,30 @@ namespace API.Client
     {
         ActorSystem _system;
 
-        public IActorRef api { get; }
+        public IActorRef _api { get; }
 
         public SystemActors(ActorSystem system)
         {
             _system = system;
 
-            api = _system.ActorOf(Props.Create(() => new ApiMaster()).WithRouter(FromConfig.Instance), "taskApi");
+            _api = _system.ActorOf(Props.Create(() => new ApiMaster()).WithRouter(FromConfig.Instance), "taskApi");
 
-
-            //var printer = _system.ActorOf<Printer>();
-
+            /*
             _system.Scheduler.Advanced.ScheduleRepeatedly(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2), () =>
             {
-                //api.Tell("ping", printer);
-
-                if (api.Ask<Routees>(new GetRoutees()).Result.Members.Any())
+                if (_api.Ask<Routees>(new GetRoutees()).Result.Members.Any())
                 {
-                    api.Tell("ping", null);
+                    _api.Tell("ping", null);
                 }
 
-            });
-
-            //_system.WhenTerminated.Wait();
+            });*/
         }
 
 
-        public Task<>
+        public Task<UserResponse> GetUser(string email)
+        {
+            return _api.Ask<UserResponse>(new GetUser(email));
+        }
+
     }
 }

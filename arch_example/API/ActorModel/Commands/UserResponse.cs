@@ -4,10 +4,10 @@ namespace API.ActorModel.Commands
 {
     public class GetUser
     {
-        public GetUser(string name)
+        public GetUser(string email)
         {
-            Name = name;
+            Email = email;
         }
-        public string Name { get; }
+        public string Email { get; }
     }
 }

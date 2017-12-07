@@ -10,6 +10,6 @@ namespace Domain.Persistent
 
         void RegisterNewUser(User newUser);
 
-        Task<User> FindAsync(string email, string externalUserId);
+        Task<User> FindAsync(string email);
     }
 }

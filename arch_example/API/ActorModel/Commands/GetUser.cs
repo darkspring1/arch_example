@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace API.ActorModel.Commands
+﻿namespace API.ActorModel.Commands
 {
-    class UserResponse
+    public class UserResponse
     {
+        public UserResponse(string name)
+        {
+            this.Name = name;
+        }
+
+        public string Name { get; }
     }
 }

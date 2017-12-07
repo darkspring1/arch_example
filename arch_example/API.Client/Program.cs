@@ -14,6 +14,13 @@ namespace API.Client
         {
             System = AkkaConfig.CreateActorSystem();
             ApiClient = new SystemActors(System);
+
+            System.Scheduler.Advanced.ScheduleRepeatedly(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2), () =>
+            {
+                ApiClient.GetUser("olt.egor@gmail.com")
+                .ContinueWith(t => Console.WriteLine(t.Result.Name));
+            });
+
             System.WhenTerminated.Wait();
         }
     }

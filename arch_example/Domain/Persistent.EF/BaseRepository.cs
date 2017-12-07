@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SM.Domain.Persistent.EF;
 using System;
 using System.Linq;
 using System.Linq.Expressions;

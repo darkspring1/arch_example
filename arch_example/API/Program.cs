@@ -1,6 +1,7 @@
 ﻿using Akka.Actor;
+using API.Ioc;
 using Common;
-using System;
+using StructureMap;
 
 namespace API
 {
@@ -8,8 +9,11 @@ namespace API
     {
         internal static ActorSystem System;
 
+        internal static IContainer Container;
+
         static void Main(string[] args)
         {
+            Container = new Container(new ApiRegistry());
             System = AkkaConfig.CreateActorSystem();
             System.WhenTerminated.Wait();
         }
