@@ -8,11 +8,12 @@ akka {
 
 			deployment {
 				/taskApi {
-					router = round-robin-pool
-					nr-of-instances = 1
+					router = smallest-mailbox-pool
+					nr-of-instances = 10
+
 					cluster {
 						enabled = on
-						max-nr-of-instances-per-node = 10
+						max-nr-of-instances-per-node = 1
 						allow-local-routees = off
 						use-role = task.api
 					}
